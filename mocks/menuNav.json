@@ -1,0 +1,48 @@
+[
+    {
+        "name": "Inicio",
+        "path": "/transactions",
+        "id": "1"
+    },
+    {
+        "name": "Historial de Operaciones",
+        "path": "/transactions/historial",
+        "id": "2"
+
+    },
+    {
+        "name": "Cuentas Bancarias",
+        "path": "/transactions/cuentas-bancarias",
+        "id": "3"
+
+    },
+    {
+        "name": "Regala y gana",
+        "path": "/transactions/regala-y-gana",
+        "id": "4"
+
+    },
+    {
+        "name": "Kambista Beneficios",
+        "path": "/transactions/kambista-beneficios", 
+        "id": "5"
+    },
+    {
+        "name": "Alerta de tipo de cambio",
+        "path": "/transactions/alerta-tipo-cambio",
+        "id": "6"
+
+    },
+    {
+        "name": "kambi koinks",
+        "path": "/transactions/kambi-koinks",
+        "id": "7"
+
+    },
+    {
+        "name": "Ayuda",
+        "path": "/transactions/ayuda",
+        "id": "8"
+
+    }
+]
