@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import successImage from "../../../assets/images/celphone.png"
 import AppButton from "../ui/AppButton.vue";
+import { useOnboardingStore } from "../../stores/onboarding";
+
+const onboardingStore = useOnboardingStore()
 const handleContinue = () => {
   navigateTo('/transactions')
 }
@@ -17,7 +20,7 @@ const handleContinue = () => {
     <h1
       class="mb-4 text-center text-3xl font-bold text-[#1D2433]"
     >
-      ¡Felicitaciones Ejemplo, tu
+      ¡Felicitaciones {{ onboardingStore.fullName }} tu
       <br />
       perfil ha sido creado!
     </h1>
