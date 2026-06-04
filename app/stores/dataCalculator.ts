@@ -5,17 +5,20 @@ export const useDataCalculatorStore = defineStore('dataCalculator', {
     amountSent: 0,
     amountReceived: 0,
     coupon: '', 
+    rate: 0,
   }),
 
   actions:{
     setDataCalculator(data: {
       amountSent: number,
       amountReceived: number,
-      coupon: string
+      coupon: string,
+      rate: number,
     }) {
       this.amountSent = data.amountSent
       this.amountReceived = data.amountReceived
       this.coupon = data.coupon
+      this.rate = data.rate
     }
   }
 })
