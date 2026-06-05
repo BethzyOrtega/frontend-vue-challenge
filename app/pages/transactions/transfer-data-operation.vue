@@ -10,21 +10,6 @@ import { useDataCalculatorStore } from "../../stores/dataCalculator";
 const dataTransferStore = useDataTranfer();
 const dataOnboardingStore = useOnboardingStore();
 const dataCalculatorStore = useDataCalculatorStore();
-
-const transferData = {
-  bank: "Interbank",
-  amount: "S/ 1,000.00",
-  accountNumber: "201010000000000",
-  ruc: "20601708141",
-  accountHolder: "Kambista SAC",
-  accountType: "Corriente",
-};
-
-const copyAccount = async () => {
-  await navigator.clipboard.writeText(
-    transferData.accountNumber
-  );
-};
 </script>
 
 <template>
@@ -90,7 +75,6 @@ const copyAccount = async () => {
 
               <button
                 class="text-gray-500 hover:text-black"
-                @click="copyAccount"
               >
                 📋
               </button>
@@ -130,7 +114,7 @@ const copyAccount = async () => {
           variant="primary"
           type="button"
           @click="
-            navigateTo('/transactions/send-receipt')
+            navigateTo('/transactions/send-proof')
           "
         />
       </div>
