@@ -7,20 +7,23 @@ import AppButton from "~/components/ui/AppButton.vue";
 import AccountSelector from "~/components/account/AccountSelector.vue";
 import AccountsModal from "~/components/account/AccountsModal.vue";
 import CreateAccountDrawer from "~/components/account/AccountDrawer.vue";
-
 import { useDataCalculatorStore } from "../stores/dataCalculator";
 import type { Account } from "~/types/account";
+import { useValidationDataOperation } from "../composables/useValidationDataOperation";
+import {useDataTranfer} from "../stores/dataTransfer"
 
+const dataTransferStore = useDataTranfer()
 const dataCalculatorStore = useDataCalculatorStore();
+const { errors, validate } = useValidationDataOperation();
 
 const accounts = ref<Account[]>([
   {
     id: "1",
     alias: "BCP",
-    accountNumber: "444444444444444",
+    accountNumber: 444444444444444,
     bank: "BCP",
     currency: "PEN",
-    accountType: "saving",
+    accountType: "Ahorro",
   },
 ]);
 
@@ -52,13 +55,69 @@ const SOURCE_FUNDS_OPTIONS = SourceFunds.map((source) => ({
   label: source.name,
 }));
 const form = reactive({
-  documentType: "",
   bank: "",
+  account: "",
   sourceFunds: "",
 });
-const errors = reactive({
-  documentType: "",
+
+watch(
+  () => form.bank,
+  (value) => {
+    if (value) {
+      errors.bank = "";
+    }
+  },
+);
+
+watch(
+  () => form.sourceFunds,
+  (value) => {
+    if (value) {
+      errors.sourceFunds = "";
+    }
+  },
+);
+
+watch(selectedAccount, (value) => {
+  if (value) {
+    errors.account = "";
+  }
 });
+
+const handleSubmit = () => {
+  const isValid = validate(form.bank, form.sourceFunds, selectedAccount.value);
+
+  if (!isValid) return;
+
+  const senderBank = BANK_OPTIONS.find(
+    bank => String(bank.value) === String(form.bank)
+  );
+
+  const sourceFund = SOURCE_FUNDS_OPTIONS.find(
+    source => String(source.value) === String(form.sourceFunds)
+  );
+
+  dataTransferStore.setDataTransfer({
+    senderBank: selectedAccount.value?.bank ?? "",
+    accountType: sourceFund?.label ?? "",
+    accountNumber: selectedAccount.value?.accountNumber ?? 0,
+
+  }) 
+
+console.log("Banco origen:", senderBank?.label);
+
+  console.log("Origen de fondos:", sourceFund?.label);
+
+  console.log("Cuenta destino:", {
+    banco: selectedAccount.value?.bank,
+    alias: selectedAccount.value?.alias,
+    numeroCuenta: selectedAccount.value?.accountNumber,
+    moneda: selectedAccount.value?.currency,
+    tipoCuenta: selectedAccount.value?.accountType,
+  });
+
+  navigateTo("/transactions/transfer-data-operation");
+};
 </script>
 
 <template>
@@ -94,13 +153,16 @@ const errors = reactive({
         para cualquier monto). Otros bancos 1 día útil.
       </AlertMessage>
 
-      <form class="space-y-4">
+      <form class="space-y-4" @submit.prevent="handleSubmit">
         <label class="label">¿Desde qué banco nos envías tu dinero?</label>
         <AppSelect
           v-model="form.bank"
           :options="BANK_OPTIONS"
           placeholder="Selecciona"
         />
+        <p v-if="errors.bank" class="mt-1 text-xs text-red-500">
+          {{ errors.bank }}
+        </p>
 
         <label class="label">¿En qué cuenta deseas recibir tu dinero?</label>
 
@@ -108,23 +170,9 @@ const errors = reactive({
           :account="selectedAccount"
           @click="showAccountsModal = true"
         />
-
-        <AccountsModal
-          :open="showAccountsModal"
-          :accounts="accounts"
-          @close="showAccountsModal = false"
-          @select="selectAccount"
-          @add="
-            showAccountsModal = false;
-            showCreateAccountDrawer = true;
-          "
-        />
-
-        <CreateAccountDrawer
-          :open="showCreateAccountDrawer"
-          @close="showCreateAccountDrawer = false"
-          @save="addAccount"
-        />
+        <p v-if="errors.account" class="mt-1 text-xs text-red-500">
+          {{ errors.account }}
+        </p>
 
         <label class="label">Origen de fondos</label>
         <AppSelect
@@ -132,9 +180,28 @@ const errors = reactive({
           :options="SOURCE_FUNDS_OPTIONS"
           placeholder="Selecciona"
         />
+        <p v-if="errors.sourceFunds" class="mt-1 text-xs text-red-500">
+          {{ errors.sourceFunds }}
+        </p>
 
         <AppButton label="CONTINUAR" type="submit" variant="primary" />
       </form>
     </div>
   </div>
+  <AccountsModal
+    :open="showAccountsModal"
+    :accounts="accounts"
+    @close="showAccountsModal = false"
+    @select="selectAccount"
+    @add="
+      showAccountsModal = false;
+      showCreateAccountDrawer = true;
+    "
+  />
+
+  <CreateAccountDrawer
+    :open="showCreateAccountDrawer"
+    @close="showCreateAccountDrawer = false"
+    @save="addAccount"
+  />
 </template>

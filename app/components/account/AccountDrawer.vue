@@ -3,6 +3,9 @@ import BankAccounts from "../../../mocks/bankAccounts.json";
 import AppButton from "../ui/AppButton.vue";
 import AppSelect from "../ui/AppSelect.vue";
 import { TYPE_ACCOUNT } from "~/constants";
+import { useValidateDataDrawer } from "../../composables/useValidateDataDrawer";
+
+const { errors, validate } = useValidateDataDrawer();
 
 const emit = defineEmits<{
   close: [];
@@ -19,19 +22,92 @@ const form = reactive({
   accountNumber: "",
   alias: "",
   currency: "PEN",
-  owner: false,
+  owner: "",
 });
+
+watch(
+  () => form.accountType,
+  (value) => {
+    if (value) {
+      errors.accountType = "";
+    }
+  },
+);
+
+watch(
+  () => form.alias,
+  (value) => {
+    if (value) {
+      errors.alias = "";
+    }
+  },
+);
+
+watch(
+  () => form.owner,
+  (value) => {
+    if (value) {
+      errors.owner = "";
+    }
+  },
+);
+
+watch(
+  () => form.accountType,
+  (value) => {
+    if (value) {
+      errors.accountType = "";
+    }
+  },
+);
+
+watch(
+  () => form.accountNumber,
+  (value) => {
+    if (value) {
+      errors.accountNumber = "";
+    }
+  },
+);
 
 const bankOptions = BankAccounts.map((bank) => ({
   value: bank.alias,
   label: bank.alias,
 }));
 
+const resetForm = () => {
+  form.accountType = "";
+  form.bank = "";
+  form.accountNumber = "";
+  form.alias = "";
+  form.currency = "PEN";
+};
+
 const saveAccount = () => {
-  emit("save", {
+  const isValid = validate(
+    form.accountType,
+    form.bank,
+    form.accountNumber,
+    form.alias,
+    form.owner,
+  );
+
+  if (!isValid) return;
+
+  const account = {
     id: crypto.randomUUID(),
-    ...form,
-  });
+    alias: form.alias,
+    accountNumber: form.accountNumber,
+    bank: form.bank,
+    currency: form.currency,
+    accountType: form.accountType,
+  };
+
+  console.log("Cuenta a guardar:", account);
+
+  emit("save", account);
+
+  resetForm();
 };
 </script>
 
@@ -51,12 +127,18 @@ const saveAccount = () => {
             placeholder="Tipo de cuenta"
             :options="TYPE_ACCOUNT"
           />
+          <p v-if="errors.accountType" class="text-xs text-red-500">
+            {{ errors.accountType }}
+          </p>
 
           <AppSelect
             v-model="form.bank"
             :options="bankOptions"
             placeholder="Selecciona"
           />
+          <p v-if="errors.bank" class="text-xs text-red-500">
+            {{ errors.bank }}
+          </p>
 
           <div class="flex gap-2">
             <button
@@ -85,12 +167,18 @@ const saveAccount = () => {
             placeholder="Número de cuenta"
             class="rounded border p-3"
           />
+          <p v-if="errors.accountNumber" class="text-xs text-red-500">
+            {{ errors.accountNumber }}
+          </p>
 
           <input
             v-model="form.alias"
             placeholder="Alias"
             class="rounded border p-3"
           />
+          <p v-if="errors.alias" class="text-xs text-red-500">
+            {{ errors.alias }}
+          </p>
 
           <label class="flex gap-2 text-sm">
             <input v-model="form.owner" type="checkbox" />

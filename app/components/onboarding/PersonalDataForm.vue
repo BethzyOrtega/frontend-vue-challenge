@@ -62,6 +62,8 @@ const handleSubmit = () => {
 
   onboardingStore.setPersonalData({
     fullName: form.fullname,
+    typeDocument: form.documentType,
+    documentNumber: form.documentNumber,
   });
 
   navigateTo("/onboarding/success");

@@ -47,7 +47,7 @@ const handleSubmit = () => {
     coupon: coupon.value,
   });
 
-  navigateTo("/transactions/details");
+  navigateTo("/transactions/complete-data-operation");
 };
 </script>
 
