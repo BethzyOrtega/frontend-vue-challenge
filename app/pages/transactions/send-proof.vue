@@ -3,6 +3,7 @@ import AppButton from "~/components/ui/AppButton.vue";
 import ImgSenProof from "../../../assets/images/send_proof.png";
 
 const selectedFile = ref<File | null>(null);
+const fileError = ref("");
 
 const handleFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -10,11 +11,13 @@ const handleFileChange = (event: Event) => {
   if (!target.files?.length) return;
 
   selectedFile.value = target.files[0] ?? null;
+
+  fileError.value = "";
 };
 
 const handleSubmit = () => {
   if (!selectedFile.value) {
-    alert("Selecciona una constancia");
+    fileError.value = "Debes adjuntar la constancia de transferencia";
     return;
   }
 
@@ -82,6 +85,10 @@ const handleSubmit = () => {
             @change="handleFileChange"
           />
         </label>
+
+        <p v-if="fileError" class="mt-2 text-xs text-red-500">
+          {{ fileError }}
+        </p>
 
         <p class="mt-3 text-sm text-gray-500">
           *Tamaño máximo permitido del archivo 10 Mb

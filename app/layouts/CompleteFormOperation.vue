@@ -10,12 +10,13 @@ import CreateAccountDrawer from "~/components/account/AccountDrawer.vue";
 import { useDataCalculatorStore } from "../stores/dataCalculator";
 import type { Account } from "~/types/account";
 import { useValidationDataOperation } from "../composables/useValidationDataOperation";
-import {useDataTranfer} from "../stores/dataTransfer"
+import { useDataTranfer } from "../stores/dataTransfer";
 
-const dataTransferStore = useDataTranfer()
+const dataTransferStore = useDataTranfer();
 const dataCalculatorStore = useDataCalculatorStore();
 const { errors, validate } = useValidationDataOperation();
-
+const showAlertInfo = ref(true);
+const showAlertWar = ref(true);
 const accounts = ref<Account[]>([
   {
     id: "1",
@@ -90,21 +91,20 @@ const handleSubmit = () => {
   if (!isValid) return;
 
   const senderBank = BANK_OPTIONS.find(
-    bank => String(bank.value) === String(form.bank)
+    (bank) => String(bank.value) === String(form.bank),
   );
 
   const sourceFund = SOURCE_FUNDS_OPTIONS.find(
-    source => String(source.value) === String(form.sourceFunds)
+    (source) => String(source.value) === String(form.sourceFunds),
   );
 
   dataTransferStore.setDataTransfer({
     senderBank: selectedAccount.value?.bank ?? "",
     accountType: sourceFund?.label ?? "",
     accountNumber: selectedAccount.value?.accountNumber ?? 0,
+  });
 
-  }) 
-
-console.log("Banco origen:", senderBank?.label);
+  console.log("Banco origen:", senderBank?.label);
 
   console.log("Origen de fondos:", sourceFund?.label);
 
@@ -147,14 +147,19 @@ console.log("Banco origen:", senderBank?.label);
         </div>
       </div>
 
-      <AlertMessage type="info" visible>
+      <AlertMessage
+        @dismiss="showAlertInfo = false"
+        type="info"
+        :visible="showAlertInfo"
+        closable
+      >
         Tiempo estimado de espera
         <strong>BCP, Interbank, BanBif y Pichincha</strong> : 15 minutos (Aplica
         para cualquier monto). Otros bancos 1 día útil.
       </AlertMessage>
 
       <form class="space-y-4" @submit.prevent="handleSubmit">
-        <label class="label">¿Desde qué banco nos envías tu dinero?</label>
+        <p class="pt-4">¿Desde qué banco nos envías tu dinero?</p>
         <AppSelect
           v-model="form.bank"
           :options="BANK_OPTIONS"
@@ -174,7 +179,18 @@ console.log("Banco origen:", senderBank?.label);
           {{ errors.account }}
         </p>
 
-        <label class="label">Origen de fondos</label>
+        <AlertMessage
+          @dismiss="showAlertWar = false"
+          type="warning"
+          :visible="showAlertWar"
+          closable
+        >
+          Recuerda que las cuentas deben
+          <strong>estar a tu nombre.</strong> Kambista
+          <strong>no transfiere a cuentas de terceros.</strong>
+        </AlertMessage>
+
+        <p class="pt-[2px]">Origen de fondos</p>
         <AppSelect
           v-model="form.sourceFunds"
           :options="SOURCE_FUNDS_OPTIONS"

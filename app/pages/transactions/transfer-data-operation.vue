@@ -2,6 +2,7 @@
 
 import OperationStepper from "../../layouts/OperationStepper.vue";
 import AppButton from "~/components/ui/AppButton.vue";
+import ImgTransfer from "../../../assets/images/img_tranfer.png"
 
 import { useDataTranfer } from "../../stores/dataTransfer";
 import { useOnboardingStore } from "../../stores/onboarding";
@@ -10,6 +11,17 @@ import { useDataCalculatorStore } from "../../stores/dataCalculator";
 const dataTransferStore = useDataTranfer();
 const dataOnboardingStore = useOnboardingStore();
 const dataCalculatorStore = useDataCalculatorStore();
+const updateTime = computed(() => {
+  const date = new Date();
+
+  date.setMinutes(date.getMinutes() + 5);
+
+  return date.toLocaleTimeString("es-PE", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+});
 </script>
 
 <template>
@@ -18,17 +30,13 @@ const dataCalculatorStore = useDataCalculatorStore();
     <div class="w-full max-w-md">
       <p class="mb-8 text-center text-sm text-gray-500">
         El tipo de cambio podría actualizarse a las:
-        <strong>13:15</strong>
+        <strong>{{ updateTime }}</strong>
       </p>
 
-      <div class="rounded-xl border bg-white p-8 shadow-sm">
+      <div class="rounded-xl border-2 bg-white p-8 shadow-sm">
         <!-- Icon -->
         <div class="mb-6 flex justify-center">
-          <div
-            class="flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F8F4]"
-          >
-            💸
-          </div>
+          <img :src="ImgTransfer" alt="img_tranfer">
         </div>
 
         <!-- Title -->
@@ -48,23 +56,23 @@ const dataCalculatorStore = useDataCalculatorStore();
         </p>
 
         <!-- Table -->
-        <div class="rounded-lg border border-gray-200">
+        <div class="rounded-lg border-2 border-gray-200">
           <div
-            class="flex justify-between border-b px-4 py-3 text-sm"
+            class="flex justify-between px-4 py-2 text-sm"
           >
             <span>Banco</span>
             <strong>{{ dataTransferStore.senderBank }}</strong>
           </div>
 
           <div
-            class="flex justify-between border-b px-4 py-3 text-sm"
+            class="flex justify-between px-4 py-2 text-sm"
           >
             <span>Monto</span>
             <strong>{{ dataCalculatorStore.amountSent }}</strong>
           </div>
 
           <div
-            class="flex justify-between border-b px-4 py-3 text-sm"
+            class="flex justify-between px-4 py-2 text-sm"
           >
             <span>Número de cuenta</span>
 
@@ -82,14 +90,14 @@ const dataCalculatorStore = useDataCalculatorStore();
           </div>
 
           <div
-            class="flex justify-between border-b px-4 py-3 text-sm"
+            class="flex justify-between  px-4 py-2 text-sm"
           >
             <span>{{ dataOnboardingStore.typeDocument }}</span>
             <strong>{{ dataOnboardingStore.documentNumber }}</strong>
           </div>
 
           <div
-            class="flex justify-between border-b px-4 py-3 text-sm"
+            class="flex justify-between px-4 py-2 text-sm"
           >
             <span>Titular de la cuenta</span>
             <strong>
@@ -98,7 +106,7 @@ const dataCalculatorStore = useDataCalculatorStore();
           </div>
 
           <div
-            class="flex justify-between px-4 py-3 text-sm"
+            class="flex justify-between px-4 py-2 text-sm"
           >
             <span>Tipo de cuenta</span>
             <strong>

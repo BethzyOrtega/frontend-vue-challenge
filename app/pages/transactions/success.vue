@@ -10,7 +10,7 @@ const kambistaCode = "km20ttfff";
 const estimatedTime = "20h 15min";
 
 const goHome = () => {
-  navigateTo("/login");
+  navigateTo("/transactions");
 };
 </script>
 

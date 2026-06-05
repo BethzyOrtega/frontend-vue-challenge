@@ -4,6 +4,9 @@ import { useExchange } from "../composables/useExchange";
 import ExchangeTabs from "~/components/exchange/ExchangeTabs.vue";
 import ExchangeAmountCard from "~/components/exchange/ExchangeAmountCard.vue";
 import { useDataCalculatorStore } from "../stores/dataCalculator";
+import coupon_cal from "../../assets/images/coupon_calculator.png";
+import coin from "../../assets/icons/coin.png";
+import startMssg from "../../assets/icons/start_mssg.png"
 
 const dataCalculatorStore = useDataCalculatorStore();
 
@@ -89,20 +92,62 @@ const handleSubmit = () => {
 
         <div class="text-right">
           <p class="text-sm text-gray-500">Koinks</p>
-
-          <p class="font-bold">10,000 🪙</p>
+          <div class="flex gap-2">
+            <svg
+              class="w-5 h-5 flex-shrink-0 self-center"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="10" stroke-linecap="round" />
+              <line
+                x1="12"
+                y1="8"
+                x2="12"
+                y2="8"
+                stroke-linecap="round"
+                stroke-width="2.5"
+              />
+              <line x1="12" y1="12" x2="12" y2="16" stroke-linecap="round" />
+            </svg>
+            <p class="font-bold">10,000</p>
+            <img :src="coin" alt="" />
+          </div>
         </div>
       </div>
 
-      <div class="mb-6 flex border border-gray-300 rounded-xl">
+      <div
+        class="mb-6 flex rounded-2xl border border-gray-300 bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+      >
+        <img :src="coupon_cal" class="px-2" />
         <input
           v-model="coupon"
           placeholder="Ingresa tu cupón"
-          class="flex-1 rounded-xl border p-3"
+          class="flex-1 rounded-l-2xl px-4 py-3 outline-none"
         />
 
         <button class="rounded-r bg-[#09142E] px-5 text-white">Aplicar</button>
       </div>
+      <div
+  class="flex items-center gap-4 p-4"
+>
+  <img
+    :src="startMssg"
+    alt="star_mssg"
+    class="h-12 w-12 flex-shrink-0"
+  />
+
+  <div class="flex flex-col justify-center">
+    <p class="text-sm text-gray-600">
+      ¿Monto mayor a $5,000 o S/18,000?
+    </p>
+
+    <p class="font-semibold text-[#09142E]">
+      ¡Obtén un Tipo de Cambio Preferencial!
+    </p>
+  </div>
+</div>
     </div>
     <AppButton
       label="INICIAR OPERACIÓN"
