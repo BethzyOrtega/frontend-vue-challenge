@@ -3,9 +3,11 @@
 const props = withDefaults(defineProps<{
   type?: 'info' | 'warning' | 'error'
   visible?: boolean
+  closable?: boolean;
 }>(), {
   type: 'info',
-  visible: false,
+  visible: true,
+  closable: false,
 })
 
 const classes = computed(() => ({
@@ -21,7 +23,7 @@ const iconColor = computed(() => {
     case 'error':
       return '#FF0000'
     default:
-      return '#336699'
+      return '##082774'
   }
 })
 
@@ -39,7 +41,7 @@ const emit = defineEmits<{ dismiss: [] }>()
       <slot />
     </div>
     <button
-      v-if="visible"
+      v-if="closable"
       type="button"
       class="flex-shrink-0 opacity-60 hover:opacity-100"
       @click="emit('dismiss')"

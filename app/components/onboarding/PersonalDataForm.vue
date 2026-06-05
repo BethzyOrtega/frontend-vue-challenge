@@ -21,6 +21,7 @@ const {
 } = usePersonalDataValidation();
 
 const submitted = ref(false);
+const showAlert = ref(true);
 
 const form = reactive({
   fullname: "",
@@ -180,7 +181,7 @@ const handleSubmit = () => {
         </div>
       </div>
 
-      <AlertMessage type="info">
+      <AlertMessage :visible="showAlert" type="info" @dismiss="showAlert = false">
         Tu documento de identidad debe coincidir con tus datos para evitar
         inconvenientes al momento de hacer una primera operación
       </AlertMessage>

@@ -28,14 +28,12 @@ onMounted(async () => {
   await calculateExchange();
 });
 
-watch(amountSent, async (value) => {
-  if (!value) return;
-
+watch(amountSent, async () => {
   await calculateExchange();
 });
-watch(operationType, async () => {
-  if (!amountSent.value) return;
 
+watch(operationType, async () => {
+  await getCurrentExchangeRate();
   await calculateExchange();
 });
 

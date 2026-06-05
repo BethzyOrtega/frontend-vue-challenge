@@ -17,8 +17,6 @@ export interface ExchangeResponse {
   };
 }
 
-
-
 export const useExchange = () => {
   const operationType = ref<"buy" | "sell">("buy");
 
@@ -40,28 +38,25 @@ export const useExchange = () => {
       bid.value = response.bid;
       ask.value = response.ask;
       exchangeRate.value =
-        operationType.value === "buy"
-          ? response.ask
-          : response.bid;
+        operationType.value === "buy" ? response.ask : response.bid;
     } catch (error) {
       console.log(error);
     }
   };
 
   const calculateExchange = async () => {
+    if (!amountSent.value || amountSent.value <= 0) {
+      amountReceived.value = 0;
+      savingsAmount.value = 0;
+      return;
+    }
     try {
-      const originCurrency =
-        operationType.value === "buy"
-          ? "PEN"
-          : "USD";
+      const originCurrency = operationType.value === "buy" ? "PEN" : "USD";
 
-      const destinationCurrency =
-        operationType.value === "buy"
-          ? "USD"
-          : "PEN";
+      const destinationCurrency = operationType.value === "buy" ? "USD" : "PEN";
 
       const response = await $fetch<ExchangeResponse>(
-        `https://api.kambista.com/v1/exchange/calculates?originCurrency=${originCurrency}&destinationCurrency=${destinationCurrency}&amount=${amountSent.value}&active=S`
+        `https://api.kambista.com/v1/exchange/calculates?originCurrency=${originCurrency}&destinationCurrency=${destinationCurrency}&amount=${amountSent.value}&active=S`,
       );
 
       amountReceived.value = response.exchange;
@@ -69,8 +64,7 @@ export const useExchange = () => {
 
       savingsAmount.value = response.savings.amount;
       savingsCurrency.value = response.savings.currency;
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
     }
   };
