@@ -100,9 +100,10 @@ watch(
   (value) => {
     if (submitted.value) {
       validateTerms(value);
+    } else if (errors.acceptTerms) {
+      errors.acceptTerms = "";
     }
 
-    errors.acceptTerms = "";
     return true;
   },
 );
@@ -112,15 +113,17 @@ watch(
   (value) => {
     if (submitted.value) {
       validatePrivacy(value);
+    } else if (errors.acceptPrivacy) {
+      errors.acceptPrivacy = "";
     }
 
-    errors.acceptPrivacy = "";
     return true;
   },
 );
 
 const handleSubmit = () => {
-  const submitted = ref(false);
+  submitted.value = true;
+
   if (!validateForm(form)) {
     return;
   }
