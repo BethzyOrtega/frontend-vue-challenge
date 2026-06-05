@@ -20,6 +20,8 @@ const {
   validatePrivacy,
 } = usePersonalDataValidation();
 
+const submitted = ref(false);
+
 const form = reactive({
   fullname: "",
   documentType: "",
@@ -30,32 +32,95 @@ const form = reactive({
   acceptPrivacy: false,
 });
 
-watch(() => form.fullname, validateFullname);
+const handleFullname = (value: string) => {
+  form.fullname = value.replace(/\b\w/g, (letter) => letter.toUpperCase());
+};
+
+watch(
+  () => form.fullname,
+  (value) => {
+    if (submitted.value) {
+      validateFullname(value);
+    }
+
+    errors.fullname = "";
+    return true;
+  },
+);
 
 watch(
   () => form.documentType,
   (value) => {
-    validateDocumentType(value);
-    validateDocumentNumber(value, form.documentNumber);
+    if (submitted.value) {
+      validateDocumentType(value);
+      validateDocumentNumber(value, form.documentNumber);
+    }
+
+    errors.documentType = "";
+    return true;
   },
 );
 
 watch(
   () => form.documentNumber,
   (value) => {
-    validateDocumentNumber(form.documentType, value);
+    if (submitted.value) {
+      validateDocumentNumber(form.documentType, value);
+    }
+    errors.documentType = "";
+    return true;
   },
 );
 
-watch(() => form.phone, validatePhone);
+watch(
+  () => form.phone,
+  (value) => {
+    if (submitted.value) {
+      validatePhone(value);
+    }
 
-watch(() => form.birthDate, validateBirthDate);
+    errors.phone = "";
+    return true;
+  },
+);
 
-watch(() => form.acceptTerms, validateTerms);
+watch(
+  () => form.birthDate,
+  (value) => {
+    if (submitted.value) {
+      validateBirthDate(value);
+    }
+    errors.birthDate = "";
+    return true;
+  },
+);
 
-watch(() => form.acceptPrivacy, validatePrivacy);
+watch(
+  () => form.acceptTerms,
+  (value) => {
+    if (submitted.value) {
+      validateTerms(value);
+    }
+
+    errors.acceptTerms = "";
+    return true;
+  },
+);
+
+watch(
+  () => form.acceptPrivacy,
+  (value) => {
+    if (submitted.value) {
+      validatePrivacy(value);
+    }
+
+    errors.acceptPrivacy = "";
+    return true;
+  },
+);
 
 const handleSubmit = () => {
+  const submitted = ref(false);
   if (!validateForm(form)) {
     return;
   }
@@ -80,6 +145,7 @@ const handleSubmit = () => {
       <!-- Nombre -->
       <AppInput
         v-model="form.fullname"
+        @update:model-value="handleFullname"
         label="Nombres completos"
         placeholder="Escribe tus nombres y apellidos"
         :maxlength="80"
@@ -135,6 +201,7 @@ const handleSubmit = () => {
           v-model="form.birthDate"
           type="date"
           class="w-full rounded-md border border-gray-200 px-4 py-3"
+          :class="form.birthDate ? 'text-[#060F26]' : 'text-[#A7A7A7]'"
         />
       </div>
       <p v-if="errors.birthDate" class="mt-1 text-xs text-red-500">
