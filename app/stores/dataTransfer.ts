@@ -7,6 +7,8 @@ export const useDataTranfer = defineStore("dataTransfer", {
     accountType: "",
   }),
 
+  persist: true,
+
   actions: {
   setDataTransfer(
     data: {

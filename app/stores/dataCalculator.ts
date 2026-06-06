@@ -9,6 +9,8 @@ export const useDataCalculatorStore = defineStore('dataCalculator', {
     currency: ""
   }),
 
+  persist: true,
+
   actions:{
     setDataCalculator(data: {
       amountSent: number,

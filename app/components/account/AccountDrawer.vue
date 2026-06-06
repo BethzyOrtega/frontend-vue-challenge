@@ -121,17 +121,7 @@ const saveAccount = () => {
     >
       <Transition name="drawer">
         <div
-          class="
-            absolute bottom-0 left-0 w-full
-            h-[80vh]
-            rounded-t-3xl
-            bg-white shadow-lg
-            overflow-y-auto
-
-            md:top-0 md:right-0 md:left-auto
-            md:h-full md:w-[50%]
-            md:rounded-none
-          "
+          class="absolute bottom-0 left-0 w-full h-[80vh] rounded-t-3xl bg-white shadow-lg overflow-y-auto md:top-0 md:right-0 md:left-auto md:h-full md:w-[50%] md:rounded-none"
         >
           <!-- Rayita mobile -->
           <div class="flex justify-center py-3 md:hidden">
@@ -142,9 +132,7 @@ const saveAccount = () => {
           <div
             class="flex items-center justify-between border-b px-4 py-4 md:px-6"
           >
-            <h2 class="text-base font-bold md:text-lg">
-              Agregar cuenta soles
-            </h2>
+            <h2 class="text-base font-bold md:text-lg">Agregar cuenta soles</h2>
 
             <button @click="emit('close')" class="text-xl">✕</button>
           </div>
@@ -184,8 +172,8 @@ const saveAccount = () => {
                   >
                     Tiempo estimado de espera
                     <strong>BCP, Interbank, BanBif y Pichincha:</strong>
-                    15 minutos (Aplica para cualquier monto). Otros bancos
-                    1 día útil.
+                    15 minutos (Aplica para cualquier monto). Otros bancos 1 día
+                    útil.
                   </AlertMessage>
                 </div>
 
@@ -247,6 +235,15 @@ const saveAccount = () => {
                     cambio sea exitoso
                   </span>
                 </label>
+                <div class="hidden md:block">
+                <AppButton
+                  class="w-full"
+                  variant="primary"
+                  label="GUARDAR CUENTA"
+                  type="submit"
+                  @click="saveAccount"
+                />
+                </div>
               </div>
             </div>
 
@@ -260,10 +257,12 @@ const saveAccount = () => {
               >
                 Tiempo estimado de espera
                 <strong>BCP, Interbank, BanBif y Pichincha:</strong>
-                15 minutos (Aplica para cualquier monto). Otros bancos
-                1 día útil.
+                15 minutos (Aplica para cualquier monto). Otros bancos 1 día
+                útil.
               </AlertMessage>
             </div>
+
+            <div class="md:hidden">
 
             <AppButton
               class="w-full"
@@ -272,6 +271,7 @@ const saveAccount = () => {
               type="submit"
               @click="saveAccount"
             />
+            </div>
           </div>
         </div>
       </Transition>

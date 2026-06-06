@@ -2,9 +2,13 @@
 import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useOnboardingStore } from "../stores/onboarding";
+import { useDataCalculatorStore } from "../stores/dataCalculator";
+import { useDataTranfer } from "../stores/dataTransfer";
 import menuList from "../../mocks/menuNav.json";
 
 const onboardingStore = useOnboardingStore();
+const dataTranferStore = useDataTranfer()
+const dataCalculatorStore = useDataCalculatorStore();
 const route = useRoute();
 const router = useRouter();
 
@@ -24,6 +28,8 @@ const logout = () => {
   auth.value = null;
 
   onboardingStore.$reset?.();
+  dataTranferStore.$reset?.(); 
+  dataCalculatorStore.$reset();
 
   isOpen.value = false;
 

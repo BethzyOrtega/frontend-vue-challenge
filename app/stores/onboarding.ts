@@ -7,6 +7,8 @@ export const useOnboardingStore = defineStore('onboarding', {
     documentNumber:""
   }),
 
+  persist: true,
+
   actions: {
     setPersonalData(data: {
       fullName: string
