@@ -6,7 +6,8 @@ import ExchangeAmountCard from "~/components/exchange/ExchangeAmountCard.vue";
 import { useDataCalculatorStore } from "../stores/dataCalculator";
 import coupon_cal from "../../assets/images/coupon_calculator.png";
 import coin from "../../assets/icons/coin.png";
-import startMssg from "../../assets/icons/start_mssg.png"
+import swithIcon from "../../assets/icons/swith.png"
+import startMssg from "../../assets/icons/start_mssg.png";
 
 const dataCalculatorStore = useDataCalculatorStore();
 
@@ -61,6 +62,8 @@ const handleSubmit = () => {
         :ask="ask"
       />
 
+      <div class="relative">
+
       <ExchangeAmountCard
         label="¿Cuánto envías?"
         :amount="amountSent"
@@ -69,10 +72,10 @@ const handleSubmit = () => {
       />
 
       <button
-        class="absolute left-1/2 z-10 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full bg-gray-200 shadow"
+        class="absolute left-1/2 top-[35%] z-10 flex h-20 w-20 -translate-x-1/2 items-center"
         @click="operationType = operationType === 'buy' ? 'sell' : 'buy'"
       >
-        ↻
+        <img :src="swithIcon" alt="">
       </button>
 
       <ExchangeAmountCard
@@ -81,6 +84,8 @@ const handleSubmit = () => {
         :currency="operationType === 'buy' ? 'Dólares' : 'Soles'"
         readonly
       />
+
+      </div>
 
       <!-- Savings -->
       <div class="mb-6 flex justify-between">
@@ -129,25 +134,17 @@ const handleSubmit = () => {
 
         <button class="rounded-r bg-[#09142E] px-5 text-white">Aplicar</button>
       </div>
-      <div
-  class="flex items-center gap-4 p-4"
->
-  <img
-    :src="startMssg"
-    alt="star_mssg"
-    class="h-12 w-12 flex-shrink-0"
-  />
+      <div class="flex items-center gap-4 p-4">
+        <img :src="startMssg" alt="star_mssg" class="h-12 w-12 flex-shrink-0" />
 
-  <div class="flex flex-col justify-center">
-    <p class="text-sm text-gray-600">
-      ¿Monto mayor a $5,000 o S/18,000?
-    </p>
+        <div class="flex flex-col justify-center">
+          <p class="text-sm text-gray-600">¿Monto mayor a $5,000 o S/18,000?</p>
 
-    <p class="font-semibold text-[#09142E]">
-      ¡Obtén un Tipo de Cambio Preferencial!
-    </p>
-  </div>
-</div>
+          <p class="font-semibold text-[#09142E]">
+            ¡Obtén un Tipo de Cambio Preferencial!
+          </p>
+        </div>
+      </div>
     </div>
     <AppButton
       label="INICIAR OPERACIÓN"
