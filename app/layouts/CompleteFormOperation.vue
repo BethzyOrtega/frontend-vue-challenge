@@ -11,7 +11,7 @@ import { useDataCalculatorStore } from "../stores/dataCalculator";
 import type { Account } from "~/types/account";
 import { useValidationDataOperation } from "../composables/useValidationDataOperation";
 import { useDataTranfer } from "../stores/dataTransfer";
-
+import { useExchange } from "../composables/useExchange";
 const dataTransferStore = useDataTranfer();
 const dataCalculatorStore = useDataCalculatorStore();
 const { errors, validate } = useValidationDataOperation();
@@ -85,6 +85,10 @@ watch(selectedAccount, (value) => {
   }
 });
 
+const originCurrency = computed(() =>
+  dataCalculatorStore.currency === "S/" ? "$" : "S/"
+);
+
 const handleSubmit = () => {
   const isValid = validate(form.bank, form.sourceFunds, selectedAccount.value);
 
@@ -104,18 +108,6 @@ const handleSubmit = () => {
     accountNumber: selectedAccount.value?.accountNumber ?? 0,
   });
 
-  console.log("Banco origen:", senderBank?.label);
-
-  console.log("Origen de fondos:", sourceFund?.label);
-
-  console.log("Cuenta destino:", {
-    banco: selectedAccount.value?.bank,
-    alias: selectedAccount.value?.alias,
-    numeroCuenta: selectedAccount.value?.accountNumber,
-    moneda: selectedAccount.value?.currency,
-    tipoCuenta: selectedAccount.value?.accountType,
-  });
-
   navigateTo("/transactions/transfer-data-operation");
 };
 </script>
@@ -130,20 +122,20 @@ const handleSubmit = () => {
       <div class="mb-6 rounded-md bg-white p-4 shadow-sm">
         <div class="flex justify-between">
           <label>Tu envías</label>
-          <label>{{ dataCalculatorStore.amountSent }}</label>
+          <label class="font-bold">{{originCurrency}}{{ dataCalculatorStore.amountSent }}</label>
         </div>
         <div class="flex justify-between">
           <label>Recibes</label>
-          <label>S/ {{ dataCalculatorStore.amountReceived }}</label>
+          <label class="font-bold">{{dataCalculatorStore.currency}}{{ dataCalculatorStore.amountReceived }}</label>
         </div>
         <div class="flex justify-between">
-          <label>Cupon aplicado</label>
-          <label>{{ dataCalculatorStore.coupon || "-" }}</label>
+          <label >Cupon aplicado</label>
+          <label class="font-bold">{{ dataCalculatorStore.coupon || "-" }}</label>
         </div>
         <hr class="my-4" />
         <div class="flex justify-between">
-          <label>Tipo de cambio</label>
-          <label>{{ dataCalculatorStore.rate }}</label>
+          <label class="font-bold">Tipo de cambio</label>
+          <label class="font-bold">{{ dataCalculatorStore.rate }}</label>
         </div>
       </div>
 

@@ -103,8 +103,6 @@ const saveAccount = () => {
     accountType: form.accountType,
   };
 
-  console.log("Cuenta a guardar:", account);
-
   emit("save", account);
 
   resetForm();

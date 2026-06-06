@@ -42,11 +42,13 @@ watch(operationType, async () => {
 });
 
 const handleSubmit = () => {
+
   dataCalculatorStore.setDataCalculator({
     amountSent: amountSent.value,
     amountReceived: amountReceived.value,
     rate: exchangeRate.value,
     coupon: coupon.value,
+    currency: savingsCurrency.value
   });
 
   navigateTo("/transactions/complete-data-operation");

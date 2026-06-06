@@ -22,8 +22,6 @@ const handleSubmit = () => {
     return;
   }
 
-  console.log("Archivo:", selectedFile.value);
-
   navigateTo("/transactions/success");
 };
 </script>
