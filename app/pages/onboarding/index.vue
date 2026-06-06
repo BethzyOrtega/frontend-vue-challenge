@@ -24,7 +24,7 @@ import LogoKambista from "../../../assets/images/logo_Kambista.png";
     </header>
 
     <main
-      class="flex min-h-[calc(100vh-72px)] items-center justify-center px-4"
+      class="flex min-h-screen justify-center bg-[#F5F5F7] px-4 pt-8 md:pt-0 md:items-center"
     >
       <PersonalDataForm />
     </main>

@@ -113,7 +113,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center">
+  <div class="flex min-h-screen justify-center bg-[#F5F5F7] px-4 pt-8 md:pt-0 md:items-center">
     <div class="w-full max-w-md rounded-xl">
       <h1 class="mb-8 text-center text-2xl font-bold text-[#1D2433]">
         Completa los datos de tu operación

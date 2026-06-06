@@ -6,7 +6,7 @@ import ExchangeAmountCard from "~/components/exchange/ExchangeAmountCard.vue";
 import { useDataCalculatorStore } from "../stores/dataCalculator";
 import coupon_cal from "../../assets/images/coupon_calculator.png";
 import coin from "../../assets/icons/coin.png";
-import swithIcon from "../../assets/icons/swith.png"
+import swithIcon from "../../assets/icons/swith.png";
 import startMssg from "../../assets/icons/start_mssg.png";
 
 const dataCalculatorStore = useDataCalculatorStore();
@@ -42,13 +42,12 @@ watch(operationType, async () => {
 });
 
 const handleSubmit = () => {
-
   dataCalculatorStore.setDataCalculator({
     amountSent: amountSent.value,
     amountReceived: amountReceived.value,
     rate: exchangeRate.value,
     coupon: coupon.value,
-    currency: savingsCurrency.value
+    currency: savingsCurrency.value,
   });
 
   navigateTo("/transactions/complete-data-operation");
@@ -56,8 +55,10 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div class="flex justify-center py-16 flex flex-col grid gap-6">
-    <div class="w-full max-w-md rounded-lg bg-white p-6 shadow">
+  <div class="flex flex-col items-center gap-6 py-16">
+    <div
+      class="w-full max-w-md rounded-lg bg-white p-6 shadow mx-4 md:mx-0 overflow-hidden"
+    >
       <ExchangeTabs
         v-model:operation-type="operationType"
         :bid="bid"
@@ -65,28 +66,26 @@ const handleSubmit = () => {
       />
 
       <div class="relative">
+        <ExchangeAmountCard
+          label="¿Cuánto envías?"
+          :amount="amountSent"
+          :currency="operationType === 'buy' ? 'Soles' : 'Dólares'"
+          @update:amount="amountSent = $event"
+        />
 
-      <ExchangeAmountCard
-        label="¿Cuánto envías?"
-        :amount="amountSent"
-        :currency="operationType === 'buy' ? 'Soles' : 'Dólares'"
-        @update:amount="amountSent = $event"
-      />
+        <button
+          class="absolute left-1/2 top-[35%] z-10 flex w-20 h-20 -translate-x-1/2 items-center"
+          @click="operationType = operationType === 'buy' ? 'sell' : 'buy'"
+        >
+          <img :src="swithIcon" alt="" />
+        </button>
 
-      <button
-        class="absolute left-1/2 top-[35%] z-10 flex h-20 w-20 -translate-x-1/2 items-center"
-        @click="operationType = operationType === 'buy' ? 'sell' : 'buy'"
-      >
-        <img :src="swithIcon" alt="">
-      </button>
-
-      <ExchangeAmountCard
-        label="Entonces recibes"
-        :amount="amountReceived"
-        :currency="operationType === 'buy' ? 'Dólares' : 'Soles'"
-        readonly
-      />
-
+        <ExchangeAmountCard
+          label="Entonces recibes"
+          :amount="amountReceived"
+          :currency="operationType === 'buy' ? 'Dólares' : 'Soles'"
+          readonly
+        />
       </div>
 
       <!-- Savings -->
@@ -134,7 +133,9 @@ const handleSubmit = () => {
           class="flex-1 rounded-l-2xl px-4 py-3 outline-none"
         />
 
-        <button class="rounded-r bg-[#09142E] px-5 text-white">Aplicar</button>
+        <button class="shrink-0 rounded-r bg-[#09142E] px-4 text-white">
+          Aplicar
+        </button>
       </div>
       <div class="flex items-center gap-4 p-4">
         <img :src="startMssg" alt="star_mssg" class="h-12 w-12 flex-shrink-0" />
@@ -148,11 +149,14 @@ const handleSubmit = () => {
         </div>
       </div>
     </div>
-    <AppButton
-      label="INICIAR OPERACIÓN"
-      type="button"
-      variant="primary"
-      @click="handleSubmit"
-    />
+
+    <div class="w-full max-w-md  md:px-0">
+      <AppButton
+        label="INICIAR OPERACIÓN"
+        type="button"
+        variant="primary"
+        @click="handleSubmit"
+      />
+    </div>
   </div>
 </template>

@@ -32,7 +32,7 @@ const logout = () => {
 </script>
 
 <template>
-  <header class="flex items-center justify-between border-b bg-white px-8 py-4 relative">
+  <header class="flex  items-center justify-between border-b bg-white px-8 py-4 relative">
     
     <h1 class="text-xl font-semibold">{{ pageTitle }}</h1>
 

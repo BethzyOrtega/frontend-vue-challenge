@@ -1,8 +1,7 @@
 <script setup>
-
 import OperationStepper from "../../layouts/OperationStepper.vue";
 import AppButton from "~/components/ui/AppButton.vue";
-import ImgTransfer from "../../../assets/images/img_tranfer.png"
+import ImgTransfer from "../../../assets/images/img_tranfer.png";
 import HeaderOperations from "~/layouts/HeaderOperations.vue";
 import { useDataTranfer } from "../../stores/dataTransfer";
 import { useOnboardingStore } from "../../stores/onboarding";
@@ -25,10 +24,10 @@ const updateTime = computed(() => {
 </script>
 
 <template>
-   <HeaderOperations>
-        <OperationStepper :current-step="2" />
-      </HeaderOperations>
-  <div class="flex min-h-screen justify-center px-4 py-10">
+  <HeaderOperations>
+    <OperationStepper :current-step="2" />
+  </HeaderOperations>
+  <div class="flex justify-center px-4 pt-2 pb-10 md:min-h-screen md:py-10">
     <div class="w-full max-w-md">
       <p class="mb-8 text-center text-sm text-gray-500">
         El tipo de cambio podría actualizarse a las:
@@ -38,13 +37,11 @@ const updateTime = computed(() => {
       <div class="rounded-xl border-2 bg-white p-8 shadow-sm">
         <!-- Icon -->
         <div class="mb-6 flex justify-center">
-          <img :src="ImgTransfer" alt="img_tranfer">
+          <img :src="ImgTransfer" alt="img_tranfer" />
         </div>
 
         <!-- Title -->
-        <h1
-          class="mb-3 text-center text-3xl font-bold text-[#09142E]"
-        >
+        <h1 class="mb-3 text-center text-3xl font-bold text-[#09142E]">
           Transfiere a Kambista
         </h1>
 
@@ -60,58 +57,60 @@ const updateTime = computed(() => {
         <!-- Table -->
         <div class="rounded-lg border-2 border-gray-200">
           <div
-            class="flex justify-between px-4 py-2 text-sm"
+            class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm"
           >
             <span>Banco</span>
-            <strong>{{ dataTransferStore.senderBank }}</strong>
+            <strong class="mt-1 ml-4 md:ml-0 md:mt-0">{{
+              dataTransferStore.senderBank
+            }}</strong>
           </div>
 
           <div
-            class="flex justify-between px-4 py-2 text-sm"
+            class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm"
           >
             <span>Monto</span>
-            <strong>{{ dataCalculatorStore.amountSent }}</strong>
+            <strong class="mt-1 ml-4 md:ml-0 md:mt-0">{{
+              dataCalculatorStore.amountSent
+            }}</strong>
           </div>
 
           <div
-            class="flex justify-between px-4 py-2 text-sm"
+            class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm"
           >
             <span>Número de cuenta</span>
 
             <div class="flex items-center gap-2">
-              <strong>
+              <strong class="mt-1 ml-4 md:ml-0 md:mt-0">
                 {{ dataTransferStore.accountNumber }}
               </strong>
 
-              <button
-                class="text-gray-500 hover:text-black"
-              >
-                📋
-              </button>
+              <button class="text-gray-500 hover:text-black">📋</button>
             </div>
           </div>
 
           <div
-            class="flex justify-between  px-4 py-2 text-sm"
+            class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm"
           >
             <span>{{ dataOnboardingStore.typeDocument }}</span>
-            <strong>{{ dataOnboardingStore.documentNumber }}</strong>
+            <strong class="mt-1 ml-4 md:ml-0 md:mt-0">{{
+              dataOnboardingStore.documentNumber
+            }}</strong>
           </div>
 
           <div
-            class="flex justify-between px-4 py-2 text-sm"
+            class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm"
           >
             <span>Titular de la cuenta</span>
-            <strong>
+            <strong class="mt-1 ml-4 md:ml-0 md:mt-0">
               {{ dataOnboardingStore.fullName }}
             </strong>
           </div>
 
           <div
-            class="flex justify-between px-4 py-2 text-sm"
+            class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm"
           >
             <span>Tipo de cuenta</span>
-            <strong>
+            <strong class="mt-1 ml-4 md:ml-0 md:mt-0">
               {{ dataTransferStore.accountType }}
             </strong>
           </div>
@@ -123,9 +122,7 @@ const updateTime = computed(() => {
           label="YA HICE MI TRANSFERENCIA"
           variant="primary"
           type="button"
-          @click="
-            navigateTo('/transactions/send-proof')
-          "
+          @click="navigateTo('/transactions/send-proof')"
         />
       </div>
     </div>

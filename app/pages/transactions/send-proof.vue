@@ -30,7 +30,7 @@ const handleSubmit = () => {
   <HeaderOperations>
     <OperationStepper :current-step="3" />
   </HeaderOperations>
-  <div class="flex min-h-screen flex-col items-center justify-center gap-8">
+  <div class="flex min-h-screen flex-col items-center justify-start pt-6 md:justify-center mx-10 md:mx-0 gap-8 md:pt-0">
     <div
       class="w-full max-w-2xl rounded-xl border border-gray-200 bg-white p-8"
     >

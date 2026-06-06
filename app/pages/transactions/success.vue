@@ -3,8 +3,10 @@ import AppButton from "~/components/ui/AppButton.vue";
 import { useDataCalculatorStore } from "~/stores/dataCalculator";
 import succesImg from "../../../assets/images/success_img.png";
 import bannerImg from "../../../assets/images/banner_succes.png";
+import HeaderOperations from "~/layouts/HeaderOperations.vue";
 
 const dataCalculatorStore = useDataCalculatorStore();
+
 
 const kambistaCode = "km20ttfff";
 const estimatedTime = "20h 15min";
@@ -15,7 +17,8 @@ const goHome = () => {
 </script>
 
 <template>
-  <div class="flex min-h-screen items-center justify-center bg-[#F5F5F7] px-4">
+  <HeaderOperations :show-back-button="false"/>
+  <div class="flex min-h-screen justify-center bg-[#F5F5F7] px-4 pt-8 md:pt-0 md:items-center">
     <div class="w-full max-w-md">
       <!-- Card -->
       <div
@@ -37,10 +40,10 @@ const goHome = () => {
 
         <!-- Info -->
         <div class="space-y-4">
-          <div class="flex justify-between">
+          <div class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm">
             <span class="text-sm text-gray-500"> Código Kambista </span>
 
-            <span class="font-semibold">
+            <span class="font-semibold mt-1 ml-4 md:ml-0 md:mt-0">
               {{ kambistaCode }}
             </span>
           </div>
@@ -49,18 +52,18 @@ const goHome = () => {
             *Usa tu código para dar seguimiento a tu operación.
           </p>
 
-          <div class="flex justify-between">
+          <div class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm">
             <span class="font-medium"> Monto a recibir </span>
 
-            <span class="font-bold text-[#09142E]">
+            <span class="font-bold text-[#09142E] mt-1 ml-4 md:ml-0 md:mt-0">
               S/ {{ Number(dataCalculatorStore.amountReceived).toFixed(2) }}
             </span>
           </div>
 
-          <div class="flex justify-between">
+          <div class="flex flex-col md:flex-row md:justify-between px-4 py-2 text-sm">
             <span class="font-medium"> Tiempo estimado de espera </span>
 
-            <span class="font-bold text-[#09142E]">
+            <span class="font-bold text-[#09142E] mt-1 ml-4 md:ml-0 md:mt-0">
               {{ estimatedTime }}
             </span>
           </div>
