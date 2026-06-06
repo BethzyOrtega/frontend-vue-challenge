@@ -2,7 +2,7 @@
 import AppButton from "~/components/ui/AppButton.vue";
 import ImgSenProof from "../../../assets/images/send_proof.png";
 import OperationStepper from "~/layouts/OperationStepper.vue";
-
+import HeaderOperations from "~/layouts/HeaderOperations.vue";
 const selectedFile = ref<File | null>(null);
 const fileError = ref("");
 
@@ -27,7 +27,9 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <OperationStepper :current-step="3" />
+  <HeaderOperations>
+    <OperationStepper :current-step="3" />
+  </HeaderOperations>
   <div class="flex min-h-screen flex-col items-center justify-center gap-8">
     <div
       class="w-full max-w-2xl rounded-xl border border-gray-200 bg-white p-8"

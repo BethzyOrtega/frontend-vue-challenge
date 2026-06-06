@@ -2,29 +2,25 @@
 import AppButton from "../ui/AppButton.vue";
 import AppInput from "../ui/AppInput.vue";
 
-const {
-  form,
-  errors,
-  loginError,
-  loading,
-  login,
-} = useLoginValidation()
-
+const { form, errors, loginError, loading, login } = useLoginValidation();
 
 const handleSubmit = async () => {
- const success = await login()
+  const success = await login();
 
   if (success) {
-    navigateTo('/onboarding')
+    const auth = useCookie("auth");
+
+    auth.value = "logged";
+    navigateTo("/onboarding");
   }
-
-};  
-
+};
 </script>
 
 <template>
   <div class="w-full max-w-sm">
-    <h1 class="mb-8 text-4xl font-bold text-[#1D2433]">Inicia sesión</h1>
+    <h1 class="mb-8 text-4xl font-bold text-[#1D2433] text-center md:text-left">
+      Inicia sesión
+    </h1>
 
     <form class="w-full max-w-md space-y-4" @submit.prevent="handleSubmit">
       <AppInput

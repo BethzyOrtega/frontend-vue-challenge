@@ -3,7 +3,7 @@
 import OperationStepper from "../../layouts/OperationStepper.vue";
 import AppButton from "~/components/ui/AppButton.vue";
 import ImgTransfer from "../../../assets/images/img_tranfer.png"
-
+import HeaderOperations from "~/layouts/HeaderOperations.vue";
 import { useDataTranfer } from "../../stores/dataTransfer";
 import { useOnboardingStore } from "../../stores/onboarding";
 import { useDataCalculatorStore } from "../../stores/dataCalculator";
@@ -25,7 +25,9 @@ const updateTime = computed(() => {
 </script>
 
 <template>
-    <OperationStepper :current-step="2" />
+   <HeaderOperations>
+        <OperationStepper :current-step="2" />
+      </HeaderOperations>
   <div class="flex min-h-screen justify-center px-4 py-10">
     <div class="w-full max-w-md">
       <p class="mb-8 text-center text-sm text-gray-500">
