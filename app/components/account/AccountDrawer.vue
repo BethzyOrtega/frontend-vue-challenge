@@ -180,11 +180,16 @@ const saveAccount = () => {
             {{ errors.alias }}
           </p>
 
-          <label class="flex gap-2 text-sm">
+          <label
+            class="flex gap-2 text-sm"
+            :class="{ 'text-red-500': errors.owner }"
+          >
             <input v-model="form.owner" type="checkbox" />
 
-            *Es obligatorio que la cuenta esté a tu nombre para que el cambio
-            sea exitoso
+            <span>
+              *Es obligatorio que la cuenta esté a tu nombre para que el cambio
+              sea exitoso
+            </span>
           </label>
 
           <AppButton

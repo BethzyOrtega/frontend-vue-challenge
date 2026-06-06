@@ -17,7 +17,7 @@ const emit = defineEmits<{
     @click="emit('click')"
   >
     <template v-if="account">
-      <div class="font-medium">
+      <div class="font-ligth">
         {{ account.alias }}
       </div>
     </template>
