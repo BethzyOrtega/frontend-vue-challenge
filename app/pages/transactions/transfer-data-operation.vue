@@ -25,7 +25,7 @@ const updateTime = computed(() => {
 </script>
 
 <template>
-    <OperationStepper />
+    <OperationStepper :current-step="2" />
   <div class="flex min-h-screen justify-center px-4 py-10">
     <div class="w-full max-w-md">
       <p class="mb-8 text-center text-sm text-gray-500">

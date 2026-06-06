@@ -12,26 +12,16 @@ const steps = ["Completa", "Transfiere", "Envía constancia"];
 <template>
   <div class="flex items-center justify-center px-8 py-6">
     <div>
-        <img
-          :src="logo"
-          alt="Kambista"
-          class="h-8"
-        />
-      </div>
+      <img :src="logo" alt="Kambista" class="h-8" />
+    </div>
     <div class="flex flex-1 items-center justify-center">
       <template v-for="(step, index) in steps" :key="step">
         <!-- Paso -->
         <div class="flex flex-col items-center">
           <div
-            class="flex h-8 w-8 items-center justify-center rounded-full border-2"
-            :class="
-              index + 1 <= currentStep
-                ? 'border-[#20D6C7] bg-[#20D6C7] text-white'
-                : 'border-gray-300 bg-white text-gray-400'
-            "
-          >
-            {{ index + 1 }}
-          </div>
+            class="h-3 w-3 rounded-full"
+            :class="index + 1 <= currentStep ? 'bg-black' : 'bg-gray-300'"
+          />
 
           <span
             class="mt-2 text-xs"
@@ -48,8 +38,8 @@ const steps = ["Completa", "Transfiere", "Envía constancia"];
         <!-- Línea -->
         <div
           v-if="index < steps.length - 1"
-          class="mx-4 h-[2px] w-24"
-          :class="index + 1 < currentStep ? 'bg-[#20D6C7]' : 'bg-gray-300'"
+          class=" h-[1px] w-40"
+          :class="index + 1 < currentStep ? 'bg-black' : 'bg-gray-300'"
         />
       </template>
     </div>

@@ -10,7 +10,7 @@ import OperationStepper from "../../layouts/OperationStepper.vue";
 
     <main class="flex-1">
    
-        <OperationStepper />
+        <OperationStepper :current-step="1" />
         <CompleteFormOperation />
         
     </main>
