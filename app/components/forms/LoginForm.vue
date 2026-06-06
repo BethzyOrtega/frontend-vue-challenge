@@ -50,7 +50,7 @@ const handleSubmit = async () => {
 
       <p class="text-center text-sm text-gray-600">
         ¿No tienes cuenta?
-        <NuxtLink to="/onboarding" class="font-semibold hover:underline">
+        <NuxtLink to="/" class="font-semibold hover:underline">
           Regístrate aquí
         </NuxtLink>
       </p>
