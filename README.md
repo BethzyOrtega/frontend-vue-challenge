@@ -1,75 +1,175 @@
-# Nuxt Minimal Starter
+# Kambista - Frontend Vue Challenge
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Este repositorio contiene el frontend del desafío técnico de Kambista, construido con Nuxt 3 y TypeScript. Incluye formularios de autenticación y onboarding, componentes reutilizables y mocks para datos locales.
 
-## Setup
+### Credenciales de demo
 
-Make sure to install dependencies:
+Para facilitar pruebas, la aplicación acepta las siguientes credenciales de demo en el formulario de login:
+
+- Correo: `demo@kambista.com`
+- Contraseña: `123456`
+
+## Tecnologías
+
+- Nuxt 4
+- Vue 3 + Composition API
+- TypeScript
+- Tailwind CSS
+- Vite / esbuild (según configuración)
+
+## Requisitos
+
+- Node.js 18 o superior
+- npm o pnpm
+
+## Instalación
+
+1. Clona el repositorio:
 
 ```bash
-# npm
+git clone <repo-url>
+cd frontend-vue-challenge
+```
+
+2. Instala dependencias:
+
+```bash
 npm install
-
-# pnpm
+# o
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+## Desarrollo
 
-Start the development server on `http://localhost:3000`:
+Inicia el servidor de desarrollo:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Abre http://localhost:3000 (o la URL que indique Nuxt) para ver la aplicación.
 
-Build the application for production:
+## Scripts útiles
 
-```bash
-# npm
-npm run build
+- `npm run dev` - inicia el servidor en modo desarrollo
+- `npm run build` - compila la aplicación para producción
+- `npm run preview` - sirve la versión compilada localmente
 
-# pnpm
-pnpm build
+## Estructura del proyecto (resumen)
 
-# yarn
-yarn build
+- `app/` - archivos principales de la app (pages, components, layouts, assets)
+	- `components/` - componentes reutilizables, p.ej. `ui/`, `forms/`, `onboarding/`
+	- `pages/` - rutas de la aplicación (p.ej. `login.vue`)
+	- `assets/` - imágenes, estilos y recursos estáticos
+- `mocks/` - datos JSON de ejemplo para pruebas y desarrollo
+- `public/` - archivos estáticos servidos tal cual
+- `nuxt.config.ts` - configuración del proyecto
+- `package.json` - scripts y dependencias
 
-# bun
-bun run build
+### Estructura completa del proyecto
+
+```
+app/
+	app.vue
+	components/
+		ui/
+			AppButton.vue
+			AppInput.vue
+			AppSelect.vue
+			AppTerms.vue
+		forms/
+			LoginForm.vue
+			RegisterForm.vue
+		onboarding/
+			PersonalDataForm.vue
+			RegistrationSucces.vue
+		account/
+			AccountsModal.vue
+			AccountSelector.vue
+			AccountDrawer.vue
+		exchange/
+			ExchangeTabs.vue
+			ExchangeAmountCard.vue
+	pages/
+		login.vue
+		onboarding/
+			index.vue
+			success.vue
+		transactions/
+			index.vue
+			transfer-data-operation.vue
+			success.vue
+			send-proof.vue
+			regala-y-gana.vue
+			kambista-beneficios.vue
+			kambi-koinks.vue
+			historial.vue
+			cuentas-bancarias.vue
+			complete-data-operation.vue
+			ayuda.vue
+			alerta-tipo-cambio.vue
+	layouts/
+		Calculator.vue
+		CompleteFormOperation.vue
+		HeaderOperations.vue
+		HeaderPage.vue
+		OperationStepper.vue
+		Sidebar.vue
+	middleware/
+		auth.global.ts
+		transaction.ts
+	composables/
+		useExchange.ts
+		useLoginValidation.ts
+		usePersonalDataValidation.ts
+		useValidationDataOperation.ts
+		useValidateDataDrawer.ts
+	stores/
+		onboarding.ts
+		dataTransfer.ts
+		dataCalculator.ts
+	types/
+		account.ts
+	constants.ts
+	app.vue
+assets/
+	images/
+		home_desk.png
+		banner_succes.png
+		coupon_calculator.png
+		img_tranfer.png
+		logo_Kambista.png
+		send_proof.png
+		success_img.png
+		celphone.png
+	icons/
+		coin.png
+		eye_close.png
+		eye_open.png
+		start_mssg.png
+		swith.png
+mocks/
+	bankAccounts.json
+	sourceFunds.json
+	menuNav.json
+public/
+	robots.txt
+	favicon.ico
+nuxt.config.ts
+package.json
+package-lock.json
+tsconfig.json
+.gitignore
+README.md
 ```
 
-Locally preview production build:
+## Componentes y comportamiento relevantes
 
-```bash
-# npm
-npm run preview
+- `AppTerms.vue` - componente con checkboxes para términos y política de privacidad. Muestra errores y estilos de foco.
+- `LoginForm.vue` - formulario de autenticación usado en `pages/login.vue`.
+- `PersonalDataForm.vue` - formulario de onboarding con validaciones y uso de `AppTerms`.
 
-# pnpm
-pnpm preview
+## Validación y estado
 
-# yarn
-yarn preview
+La validación de `PersonalDataForm` se realiza en `app/composables/usePersonalDataValidation.ts`. El estado de onboarding se gestiona mediante `stores/onboarding.js`.
 
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

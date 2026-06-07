@@ -54,15 +54,15 @@ export const useLoginValidation = () => {
       
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      if (
-        form.email !== 'demo@kambista.com'
-        || form.password !== '123456'
-      ) {
+        const DEMO_EMAIL = 'demo@kambista.com'
+        const DEMO_PASSWORD = '123456'
+
+        if (form.email === DEMO_EMAIL && form.password === DEMO_PASSWORD) {
+          return true
+        }
+
         loginError.value = 'Correo o contraseña incorrectos'
         return false
-      }
-
-      return true
     }
     finally {
       loading.value = false
