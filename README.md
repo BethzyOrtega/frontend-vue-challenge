@@ -2,6 +2,13 @@
 
 Este repositorio contiene el frontend del desafío técnico de Kambista, construido con Nuxt 3 y TypeScript. Incluye formularios de autenticación y onboarding, componentes reutilizables y mocks para datos locales.
 
+## Despliegue
+
+La app está desplegada en Netlify en:
+
+- https://kambeth.netlify.app/login
+
+
 ### Credenciales de demo
 
 Para facilitar pruebas, la aplicación acepta las siguientes credenciales de demo en el formulario de login:
@@ -172,6 +179,7 @@ README.md
 ## Validación y estado
 
 La validación de `PersonalDataForm` se realiza en `app/composables/usePersonalDataValidation.ts`. El estado de onboarding se gestiona mediante `stores/onboarding.js`.
+
 
 ## Funcionalidades pendientes
 
