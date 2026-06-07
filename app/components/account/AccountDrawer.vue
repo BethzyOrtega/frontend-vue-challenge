@@ -123,7 +123,6 @@ const saveAccount = () => {
         <div
           class="absolute bottom-0 left-0 w-full h-[80vh] rounded-t-3xl bg-white shadow-lg overflow-y-auto md:top-0 md:right-0 md:left-auto md:h-full md:w-[50%] md:rounded-none"
         >
-          <!-- Rayita mobile -->
           <div class="flex justify-center py-3 md:hidden">
             <div class="h-1.5 w-12 rounded-full bg-gray-300" />
           </div>

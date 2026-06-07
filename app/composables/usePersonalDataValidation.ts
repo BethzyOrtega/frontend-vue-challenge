@@ -12,23 +12,23 @@ export const usePersonalDataValidation = () => {
     
   })
 
-  const isAdult = (birthDate: string) => {
-    const birth = new Date(birthDate)
-    const today = new Date()
+  // const isAdult = (birthDate: string) => {
+  //   const birth = new Date(birthDate)
+  //   const today = new Date()
 
-    let age = today.getFullYear() - birth.getFullYear()
+  //   let age = today.getFullYear() - birth.getFullYear()
 
-    const monthDiff = today.getMonth() - birth.getMonth()
+  //   const monthDiff = today.getMonth() - birth.getMonth()
 
-    if (
-      monthDiff < 0
-      || (monthDiff === 0 && today.getDate() < birth.getDate())
-    ) {
-      age--
-    }
+  //   if (
+  //     monthDiff < 0
+  //     || (monthDiff === 0 && today.getDate() < birth.getDate())
+  //   ) {
+  //     age--
+  //   }
 
-    return age >= 18
-  }
+  //   return age >= 18
+  // }
 
   const validateFullname = (value: string) => {
     if (!value.trim()) {
@@ -111,10 +111,10 @@ export const usePersonalDataValidation = () => {
       return false
     }
 
-    if (!isAdult(value)) {
-      errors.birthDate = 'Debe ser mayor de edad'
-      return false
-    }
+    // if (!isAdult(value)) {
+    //   errors.birthDate = 'Debe ser mayor de edad'
+    //   return false
+    // }
 
     errors.birthDate = ''
     return true
