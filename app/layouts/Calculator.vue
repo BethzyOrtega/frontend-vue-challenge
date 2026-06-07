@@ -130,7 +130,7 @@ const handleSubmit = () => {
         <input
           v-model="coupon"
           placeholder="Ingresa tu cupón"
-          class="flex-1 rounded-l-2xl px-4 py-3 outline-none"
+          class="min-w-0 flex-1 rounded-l-2xl px-4 py-3 outline-none"
         />
 
         <button class="shrink-0 rounded-r bg-[#09142E] px-4 text-white">
