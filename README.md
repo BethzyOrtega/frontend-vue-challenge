@@ -173,3 +173,13 @@ README.md
 
 La validación de `PersonalDataForm` se realiza en `app/composables/usePersonalDataValidation.ts`. El estado de onboarding se gestiona mediante `stores/onboarding.js`.
 
+## Funcionalidades pendientes
+
+Hay algunas pantallas y flujos aún pendientes de implementación o por completar:
+
+- Registro de usuarios (`RegisterForm.vue` y flujo de registro completo).
+- Recuperación de contraseña / "Olvidé mi contraseña" (email de restablecimiento y UI).
+- Verificación de email (enviar y validar código/ enlace).
+
+Estas funcionalidades están marcadas como tareas futuras y pueden implementarse conectando los formularios existentes con los endpoints apropiados y añadiendo los flujos de UI necesarios.
+
